@@ -1,28 +1,19 @@
 #!/bin/bash
 
-set -e
-
 DEVICE=$1
 BAUD=$2
 COUNT=$3
-OUT_FILE="random-data/$4"
-
-mkdir "random-data"
-
-echo -e "\tDEVICE: $DEVICE\n\tBAUD: $BAUD\n\tCOUNT: $COUNT\n\tOUT_FILE: $OUT_FILE"
-
+OUT_FILE=$4
 
 function print_usage_and_exit() {
   echo "Usage: generate-sequence <DEVICE> <BAUD> <COUNT> <OUT_FILE>"
   exit 1
 }
 
-function read_device() {
-  while IFS= read LINE; do
-    case "$LINE" in 
-      *START*)
-        echo "STARTED"
-        ;;
+function wait_device() {
+  while true; do
+    LAST_LINE=$(tail -q -n 1 "$OUT_FILE"|tr -d '\0')
+    case "$LAST_LINE" in 
       *ERROR*)
         echo "ERROR"
         break
@@ -32,10 +23,10 @@ function read_device() {
         break
         ;;
       *)
-        echo "$LINE" >> "$OUT_FILE"
+        sleep 1
         ;;
     esac
-  done < "$DEVICE"
+  done
 }
 
 [ -z $DEVICE    ] && echo "Missing first parameter <DEVICE>"    && print_usage_and_exit
@@ -43,10 +34,21 @@ function read_device() {
 [ -z $COUNT     ] && echo "Missing third parameter <COUNT>"     && print_usage_and_exit
 [ -z $OUT_FILE  ] && echo "Missing fourth parameter <OUT_FILE>" && print_usage_and_exit
 
+OUT_FILE="random-data/$OUT_FILE"
+[ -d "random-data" ] || mkdir "random-data"
+[ -f $OUT_FILE ] && echo "File $OUT_FILE already exists, aborting..." && exit
+
 >"$OUT_FILE"
+cat "$DEVICE" >> "$OUT_FILE" &
+echo -e "\tDEVICE: $DEVICE\n\tBAUD: $BAUD\n\tCOUNT: $COUNT\n\tOUT_FILE: $OUT_FILE"
+sleep 1
+
 stty "$BAUD" -F "$DEVICE" raw -echo
 echo "$COUNT" > "$DEVICE" 
 
-read_device
+echo "WAITING..."
+wait_device
+pkill -P $$
 
+echo "RESULT:"
 ls -lh "$OUT_FILE"
