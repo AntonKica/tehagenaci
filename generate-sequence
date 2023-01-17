@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e
+
+COUNT=$1
+DEV=$2
+BAUD=230400
+OUT_FILE="./random"
+
+[ -z $COUNT ] && COUNT="64"
+[ -z $DEV ] && DEV="/dev/ttyACM0"
+
+>"$OUT_FILE"
+stty "$BAUD" -F "$DEV" raw -echo
+echo "$COUNT" > "$DEV"
+
+while read -r LINE
+do
+  case $LINE in 
+    *START*)
+      echo "STARTED"
+      ;;
+    *ERROR*)
+      echo "ERROR"
+      break
+      ;;
+    *DONE*)
+      echo "DONE"
+      break
+      ;;
+    *)
+      echo "$LINE" >> "$OUT_FILE"
+      ;;
+  esac
+done < "$DEV"
+
+ls -lh "$OUT_FILE"
