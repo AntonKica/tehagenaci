@@ -2,36 +2,51 @@
 
 set -e
 
-COUNT=$1
-DEV=$2
-BAUD=230400
-OUT_FILE="./random"
+DEVICE=$1
+BAUD=$2
+COUNT=$3
+OUT_FILE="random-data/$4"
 
-[ -z $COUNT ] && COUNT="64"
-[ -z $DEV ] && DEV="/dev/ttyACM0"
+mkdir "random-data"
+
+echo -e "\tDEVICE: $DEVICE\n\tBAUD: $BAUD\n\tCOUNT: $COUNT\n\tOUT_FILE: $OUT_FILE"
+
+
+function print_usage_and_exit() {
+  echo "Usage: generate-sequence <DEVICE> <BAUD> <COUNT> <OUT_FILE>"
+  exit 1
+}
+
+function read_device() {
+  while IFS= read LINE; do
+    case "$LINE" in 
+      *START*)
+        echo "STARTED"
+        ;;
+      *ERROR*)
+        echo "ERROR"
+        break
+        ;;
+      *DONE*)
+        echo "DONE"
+        break
+        ;;
+      *)
+        echo "$LINE" >> "$OUT_FILE"
+        ;;
+    esac
+  done < "$DEVICE"
+}
+
+[ -z $DEVICE    ] && echo "Missing first parameter <DEVICE>"    && print_usage_and_exit
+[ -z $BAUD      ] && echo "Missing second parameter <BAUD>"     && print_usage_and_exit
+[ -z $COUNT     ] && echo "Missing third parameter <COUNT>"     && print_usage_and_exit
+[ -z $OUT_FILE  ] && echo "Missing fourth parameter <OUT_FILE>" && print_usage_and_exit
 
 >"$OUT_FILE"
-stty "$BAUD" -F "$DEV" raw -echo
-echo "$COUNT" > "$DEV"
+stty "$BAUD" -F "$DEVICE" raw -echo
+echo "$COUNT" > "$DEVICE" 
 
-while read -r LINE
-do
-  case $LINE in 
-    *START*)
-      echo "STARTED"
-      ;;
-    *ERROR*)
-      echo "ERROR"
-      break
-      ;;
-    *DONE*)
-      echo "DONE"
-      break
-      ;;
-    *)
-      echo "$LINE" >> "$OUT_FILE"
-      ;;
-  esac
-done < "$DEV"
+read_device
 
 ls -lh "$OUT_FILE"

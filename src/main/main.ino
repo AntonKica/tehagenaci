@@ -36,6 +36,6 @@ void loop() {
     return;
   auto in = Serial.readString();
   auto count = in.toInt();
-
+  
   generateRandom(count);
 }
