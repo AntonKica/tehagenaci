@@ -1,25 +1,43 @@
 # tehagenaci: ročníkový projekt
 
+* [tehagenaci: ročníkový projekt](#tehagenaci-ročníkový-projekt)
+   * [O projekte](#o-projekte)
+      * [Študent](#študent)
+      * [Školiaci](#školiaci)
+      * [Cieľe projektu](#cieľe-projektu)
+   * [Výsledky projektu [2023, január]](#výsledky-projektu-2023-január)
+      * [Hardvér](#hardvér)
+      * [Softvér](#softvér)
+      * [Testované prostredia](#testované-prostredia)
+      * [Izbová teplota](#izbová-teplota)
+         * [Dieharder výsledky](#dieharder-výsledky)
+         * [Veles](#veles)
+      * [Znížená teplota](#znížená-teplota)
+         * [Dieharder výsledky](#dieharder-výsledky-1)
+         * [Veles](#veles-1)
+      * [Záver](#záver)
+      * [Čo ďalej](#čo-ďalej)
+
+## O projekte
 **Názov**: Testovanie hardvérových generátorov náhodných čísiel
 
-## Študent
-
+### Študent
 **Meno**: Anton Kica
 
 **Email**: kica6@uniba.sk
 
 
-## Školiaci
-
+### Školiaci
 **Meno**: RNDr. Richard Ostertág, PhD.
 
 **Email**: ostertag@dcs.fmph.uniba.sk
 
-## Cieľe projektu
+### Cieľe projektu
 
 1. Vyvinúť alebo nájsť vhodné existujúce aplikácie pre testovanie kvality náhodných generátorov
 
 2. Získať náhodné dáta zo zvolených HW generátorov za rôznych podmienok, otestovať kvalitu súčiastok a pozorovať prípadné zmeny parametrov
+
 
 
 ## Výsledky projektu [2023, január]
@@ -38,6 +56,8 @@ Podarilo sa nám vyzbierať a spracovať dáta generované hardvérovými súči
   - testovanie spoľahlivosti náhodných generátorov a postupností
 - [cryptoauth-arduino](https://github.com/cryptotronix/cryptoauth-arduino)
   - knižnica na komunikáciu s ATECC108
+- [Veles](https://codisec.com/veles)
+  - nástroj na analýzu binárnych dát
 
 ### Testované prostredia
 Hardvérovú súčiastku sme testovali v rôznych podmienkach.
@@ -298,3 +318,24 @@ Hardvérovú súčiastku sme testovali v rôznych podmienkach.
 |dvojice bitov|trojice bitov|
 |-|-|
 |![Plane](./pictures/random-sequence-cold-plane.png)|![Cube](./pictures/random-sequence-cold-cube.png)|
+
+### Záver
+Vzorky v daných dvoch podmienkach prechádzajú mnohými testami. Pri porovnavaní
+výsledkov týchto dvoch testov môžu byť poozoruhodné rozdiely medzi
+vzájomnými hodnotami. 
+
+Napríklad, pri narodeninovom teste, je hodnota p za normálnych podmienok
+dvojnásobné väčšia, než za chladu.
+
+Podobne, test počtu jednotiek by mohol indikovať, že za chladnejšich podmienok
+je distribúcia a počet jednotiek prirodzenejší oproti normálne teplote.
+
+### Čo ďalej
+
+1. zväčšiť testovaciu vzorku pokusov, čím by sme mohli odhaliť niektoré false-positives,
+alebo potvrdiť rozličné správanie pri rozličnej teplote,
+
+2. rozšíriť množstvo testovacích prostredí a podmienok a
+
+3. následne podrobne analyzovať výsledky
+

@@ -7,7 +7,7 @@ auto g_ecc = AtEcc108();
 
 void setup() {
   Serial.begin(BAUD_RATE);
-  g_ecc.personalize();
+  //g_ecc.personalize();
 }
 
 void generateRandom(long byteCount) {
