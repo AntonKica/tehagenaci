@@ -649,6 +649,11 @@ Testy, v ktorých je signifikantnejší rozdilel p-hodnôt sú označené *
 | Izbová teplota|![Plane](./pictures/random-sequence-plane.png)|![Cube](./pictures/random-sequence-cube.png)|
 |Znížená teplota|![Plane](./pictures/random-sequence-cold-plane.png)|![Cube](./pictures/random-sequence-cold-cube.png)|
 
+#### Appendix - ako sme generovali vzorku pre test 'Znížená teplota'
+|pohľad zvnútra|pohľad zvonku|
+|-|-|
+|![Bezpečnosť von oknom - 1](./pictures/cold-sequence-experiment-0.jpeg)|![Bezpečnosť von oknom - 2](./pictures/cold-sequence-experiment-1.jpeg)|
+
 
 ### Záver
 Vzorky v daných dvoch podmienkach prechádzajú mnohými testami. Pri porovnavaní
@@ -697,7 +702,8 @@ je distribúcia a počet jednotiek prirodzenejší oproti normálne teplote.
 1. zväčšiť testovaciu vzorku pokusov, čím by sme mohli odhaliť niektoré false-positives,
 alebo potvrdiť rozličné správanie pri rozličnej teplote,
 
-2. rozšíriť množstvo testovacích prostredí a podmienok - napr. teploty 40°C, 80°C - a
+2. rozšíriť množstvo testovacích prostredí a podmienok - napr. teploty 40°C, 80°C;
+nestále napätie a
 
 3. následne podrobne analyzovať výsledky
 
