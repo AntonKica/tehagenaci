@@ -63,7 +63,7 @@ Hardvérovú súčiastku sme testovali v rôznych podmienkach.
 ### Prostredia
 |prostredie|teplota|veľkosť vzorky v MB|dĺžka generovania v minútach|
 |-|-|-|-|
-| Izbová teplota|21° (izbová)|231|1566|
+| Izbová teplota|21° (izbová)|231|1366|
 |Znížená teplota|0°|257|2218|
 
 
@@ -766,6 +766,15 @@ Testy, v ktorých je signifikantnejší rozdilel p-hodnôt sú označené *
 |pohľad zvnútra|pohľad zvonku|
 |-|-|
 |![Bezpečnosť von oknom - 1](./pictures/cold-sequence-experiment-0.jpeg)|![Bezpečnosť von oknom - 2](./pictures/cold-sequence-experiment-1.jpeg)|
+
+Vzorku sme generovali počas zamračeného počasia počas dňa a noci. Daná lokalita je orientovaná na sever
+pričom (sa domnievame) vďaka tvaru budovy aj za veternejšieho počasia mal vietor minimálnu silu.
+
+Teplota vzduchu cez deň bola približne 0°C, pričom zrána/večera mohla klesnúť na -3°C, no vďaka
+oblačnému počasiu bola približne stála.
+
+V konečnom dôsledku pomenovanie tejto vzorky 0°C nie je stopercentne presné. Z dôvodov priamočiarosti a nízkej
+odchylky teploty sme zvolili tento názov, keďže najlepšie charakterizuje esenciu tejto vzorky.
 
 
 ### Záver
