@@ -189,9 +189,9 @@ Testy, v ktorých je signifikantnejší rozdilel p-hodnôt sú označené *
 | prostredie|ntup| tsamples |psamples|  p-value |Assessment|
 |-|-|-|-|-|-|
 | Izbová teplota|   0|       100|     100|0.50319350|  PASSED  |
-|Znížená teplota|   0|       100|     100|0.23579804|  PASSED  |
 | 25°C   |   0|       100|     100|0.63349194|  PASSED  |
 | 40°C|   0|       100|     100|0.62697800|  PASSED  |
+|Znížená teplota|   0|       100|     100|0.23579804|  PASSED  |
 #### dieharder_operm5 *
 | prostredie|ntup| tsamples |psamples|  p-value |Assessment|
 |-|-|-|-|-|-|
