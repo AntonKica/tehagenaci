@@ -192,7 +192,6 @@ Testy, v ktorých je signifikantnejší rozdilel p-hodnôt sú označené *
 |Znížená teplota|   0|       100|     100|0.23579804|  PASSED  |
 | 25°C   |   0|       100|     100|0.63349194|  PASSED  |
 | 40°C|   0|       100|     100|0.62697800|  PASSED  |
-|Znížená teplota|
 #### dieharder_operm5 *
 | prostredie|ntup| tsamples |psamples|  p-value |Assessment|
 |-|-|-|-|-|-|
@@ -983,13 +982,14 @@ Testy, v ktorých je signifikantnejší rozdilel p-hodnôt sú označené *
 | Izbová teplota|  12|  65000000|       1|0.55185262|  PASSED  |
 | 25°C   |  12|  65000000|       1|0.44964087|  PASSED  |
 | 40°C|  12|  65000000|       1|0.17934608|  PASSED  |
+|Znížená teplota|  12|  65000000|       1|0.25514870|  PASSED  |
+
 #### Veles
 | prostredie|dvojice bitov|trojice bitov|
 |-|-|-|
 | Izbová teplota|![Plane](./pictures/random-sequence-plane.png)|![Cube](./pictures/random-sequence-cube.png)|
 |Znížená teplota|![Plane](./pictures/random-sequence-cold-plane.png)|![Cube](./pictures/random-sequence-cold-cube.png)|
 
-|Znížená teplota|  12|  65000000|       1|0.25514870|  PASSED  |
 Vzorku sme generovali počas zamračeného počasia počas dňa a noci. Daná lokalita je orientovaná na sever
 pričom (sa domnievame) vďaka tvaru budovy aj za veternejšieho počasia mal vietor minimálnu silu.
 
