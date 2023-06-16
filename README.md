@@ -48,7 +48,7 @@ Pomocou dosky [Ardunino UNO SMD rev. 3x](https://store.arduino.cc/products/ardui
 #### LCG vzorky
 [LCG](https://en.wikipedia.org/wiki/Linear_congruential_generator)(Linear Congruential Generator) je jednoduchý algoritmus na generovanie pseudonáhodných čísel, má jednoduchú rekurzívnu definíciu:
 
-${\displaystyle X_{n+1}=\left(aX_{n}+c\right){\bmod {m}}}$
+$${\displaystyle X_{n+1}=\left(aX_{n}+c\right){\bmod {m}}}$$
 
 kde $a$, $c$ a $m$ sú konštanty a $X_{0}$ je semienko.
 
@@ -60,9 +60,9 @@ kde $a$, $c$ a $m$ sú konštanty a $X_{0}$ je semienko.
 
 # Spracovanie vzoriek
 
-Pre vygenerované vzorky vypočítame rôzne $n×m$ matice. Táto matica nám hovorí, koľko m-tic nasledovalo po jednej n-tici. Pričom $n$-tica a $m$-tica sú v tomto prípade bitové vektory.
+Pre vygenerované vzorky vypočítame rôzne $$n×m$$ matice. Táto matica nám hovorí, koľko m-tic nasledovalo po jednej n-tici. Pričom $$n$$-tica a $$m$$-tica sú v tomto prípade bitové vektory.
 
-Maticu $n×m$ počítame teda takto:
+Maticu $$n×m$$ počítame teda takto:
 ![math](./images/math.png)
 
 
@@ -108,7 +108,7 @@ print(open(example_file, 'r').read())
     
 
 
-Takto vyzerá výstup jednej konkrétnej $n×m$ matice pre 4 vzorky. (Nie nerobili sme výpočty ručne ako by obrázok mohol naznačovať).
+Takto vyzerá výstup jednej konkrétnej $$n×m$$ matice pre 4 vzorky. (Nie nerobili sme výpočty ručne ako by obrázok mohol naznačovať).
 
 Následne tieto dáta vieme zobraziť pomocou [Pythonu](https://www.python.org) a knižníc [numpy](https://numpy.org) a [matplotlib](https://matplotlib.org):
 
@@ -235,35 +235,35 @@ process_files(input_lcg)
 
 ### Vysvetlenie
 #### Matice
-* n->m je matica $n×m$, napr. 2->1 je matica $2×1$ 
-* vypočítali sme štyri matice pre každú vzorku - $m_{2×1}$,$m_{2×2}$,$m_{4×2}$,$m_{4×4}$
+* n->m je matica $$n×m$$, napr. 2->1 je matica $$2×1$$ 
+* vypočítali sme štyri matice pre každú vzorku - $$m_{2×1}$$,$$m_{2×2}$$,$$m_{4×2}$$,$$m_{4×4}$$
 * na vrchu je názov vzorky
 
-#### Os $x$
-* na osi $x$ sa nachádza $m$-tica bitov
-#### Os $y$
-* na osi $y$ sa nachádza $n$-tica bitov
+#### Os $$x$$
+* na osi $$x$$ sa nachádza $$m$$-tica bitov
+#### Os $$y$$
+* na osi $$y$$ sa nachádza $$n$$-tica bitov
 * percentá zobrazujú precentuálny podiel riadku zo všetkých porovnaní
-* súčet percent na osi $y$ je $100\%$ 
+* súčet percent na osi $$y$$ je $$100\%$$ 
 
-#### Bunka $b_{n,m}$
-* maticová bunka $b_{n,m}$ vyjadruje odchylku danej bunky vrámci riadku
-* odchylka je rozdiel očakaváneho počtu $n-m$-tice podiel výskitu $n-m$-tice k počtu všetkých $m$-tíc v riadku
-    * majme maticu $2×1$, pozrieme sa dvojicu $00$-$0$
-    * $\#_{expected_{m}}=1/2=0.5$ 
-    * $b_{n,m}=134234434$
-    * $\#_{total_{m_{00}}}=268486962$
-    * potom $odchylka=\frac{b_{n,m}}{\#_{total_{m_{00}}}}-\#_{expected_{m}}=\frac{134234434}{268486962}-0.5=-0.00003369623=-0.0034\%$
+#### Bunka $$b_{n,m}$$
+* maticová bunka $$b_{n,m}$$ vyjadruje odchylku danej bunky vrámci riadku
+* odchylka je rozdiel očakaváneho počtu $$n-m$$-tice podiel výskitu $$n-m$$-tice k počtu všetkých $$m$$-tíc v riadku
+    * majme maticu $$2×1$$, pozrieme sa dvojicu $$00$$-$$0$$
+    * $$\#_{expected_{m}}=1/2=0.5$$ 
+    * $$b_{n,m}=134234434$$
+    * $$\#_{total_{m_{00}}}=268486962$$
+    * potom $$odchylka=\frac{b_{n,m}}{\#_{total_{m_{00}}}}-\#_{expected_{m}}=\frac{134234434}{268486962}-0.5=-0.00003369623=-0.0034\%$$
 * súčet ochyliek v riadku je 0%
 
 ### Analýza a záver
 #### LCG
-U vzoriek vygenerovaných LCG je pekne vidieť najmä na matici $4×4$ náchylnosť generovať niektore štvorice vo väčšom počte. Konkrétne, vo vzorke
-* _numerical-recipes_ sa za 4-icou $0011$ sa dosť často vyskitovala 4-ica $0000$
-* _XZ81_ sa za 4-icou $0000$ sa dosť často vyskitovala 4-ica $0000$
+U vzoriek vygenerovaných LCG je pekne vidieť najmä na matici $$4×4$$ náchylnosť generovať niektore štvorice vo väčšom počte. Konkrétne, vo vzorke
+* _numerical-recipes_ sa za 4-icou $$0011$$ sa dosť často vyskitovala 4-ica $$0000$$
+* _XZ81_ sa za 4-icou $$0000$$ sa dosť často vyskitovala 4-ica $$0000$$
 
 #### ATECC108
-U vzoriek generovaných ATECC108 už takéto náchylnosti nemožno pozorovať - ani naprieč rôznym prostrediam. Odchylky od výskytov sú rádovo až v mikropercentách ($μ\%$) a celá matica je zafarbéna ako lúka.
+U vzoriek generovaných ATECC108 už takéto náchylnosti nemožno pozorovať - ani naprieč rôznym prostrediam. Odchylky od výskytov sú rádovo až v mikropercentách ($$μ\%$$) a celá matica je zafarbéna ako lúka.
 
 #### Výsledok
 Pre generátor ATECC108 sme nespozorvali žiadnu signifikantnú zmenu medzi prostrediami. Zdá sa, že na škále 0°C až 40°C nedochádza k žiadnej zmene pri generovaní náhodných čísel.
