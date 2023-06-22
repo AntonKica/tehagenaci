@@ -20,6 +20,15 @@
 
 2. Získať náhodné dáta zo zvolených HW generátorov za rôznych podmienok, otestovať kvalitu súčiastok a pozorovať prípadné zmeny parametrov
 
+### Priečinok src/ v repozitári
+- src/arduino 
+    - zdrojový kód pre generovanie vzorky pomocou arduina a cryptoshieldu
+- src/lcg-generators
+    - zdrojový kód pre generovanie vzoriek _ZX81_ a _numerical-recipes_ pomocou algoritmu lcg
+- src/processor
+    - zdrovjový kód pre spracovávanie vygenerovaných vzoriek
+    - obsahuje jednoduché testy pre testovanie korektnosti kódu
+
 ## Tak ku projektu...
 
 Naša práca pozostávala z troch štadíí
@@ -72,7 +81,7 @@ import os
 input_atecc108 = 'output-atecc108'
 input_lcg = 'output-lcg'
 
-example_file = os.path.join(input_atsha, sorted(os.listdir(input_atecc108))[0])
+example_file = os.path.join(input_atecc108, sorted(os.listdir(input_atecc108))[0])
 print("Opening example file: " + example_file)
 print(open(example_file, 'r').read())
 ```
@@ -164,14 +173,19 @@ def process_files(output_dir):
                 for j in range(len(rhs)):
                     actual=sample_stats[i, j] / sample_cnts[i]
                     expected=1/len(rhs)
-                    ax[sample_index].text(j, i, '{0:.4f}%'.format((expected-actual) * 100), ha="center", va="center", color="black")
+                    ax[sample_index].text(j, i, '{0:.4f}%'.format((actual-expected) * 100), ha="center", va="center", color="black")
             fig.tight_layout()
 
         plt.suptitle(f"{lhs_bitcount} -> {rhs_bitcount}", fontweight="bold")
         plt.show()
 ```
 
-## Spracované vzorky ATECC108
+## Spracované vzorky
+Jednoduché vysvetlenie:
+- farba dočervená je väčšie množstvo, než očakávané
+- farba domodra je menšie mnozštvo, než očakávané
+
+### Spracované vzorky ATECC108
 
 
 ```python
@@ -180,29 +194,29 @@ process_files(input_atecc108)
 
 
     
-![png](output_6_0.png)
+![png](output_7_0.png)
     
 
 
 
     
-![png](output_6_1.png)
+![png](output_7_1.png)
     
 
 
 
     
-![png](output_6_2.png)
+![png](output_7_2.png)
     
 
 
 
     
-![png](output_6_3.png)
+![png](output_7_3.png)
     
 
 
-## Spracované vzorky LCG
+### Spracované vzorky LCG
 
 
 ```python
@@ -211,25 +225,25 @@ process_files(input_lcg)
 
 
     
-![png](output_8_0.png)
+![png](output_9_0.png)
     
 
 
 
     
-![png](output_8_1.png)
+![png](output_9_1.png)
     
 
 
 
     
-![png](output_8_2.png)
+![png](output_9_2.png)
     
 
 
 
     
-![png](output_8_3.png)
+![png](output_9_3.png)
     
 
 
@@ -248,28 +262,19 @@ process_files(input_lcg)
 
 #### Bunka $b_{n,m}$
 * maticová bunka $b_{n,m}$ vyjadruje odchylku danej bunky vrámci riadku
-* odchylka je rozdiel očakaváneho počtu $n-m$-tice podiel výskitu $n-m$-tice k počtu všetkých $m$-tíc v riadku
-    * majme maticu $2×1$, pozrieme sa dvojicu 00-0
-```math
-    \#_{expected_{m}}=1/2=0.5
-
-```
-```math
-    b_{n,m}=134234434
-```
-```math
-    \#_{total_{m_{00}}}=268486962
-```
-```math
-    odchylka=\frac{b_{n,m}}{\#_{total_{m_{00}}}}-\#_{expected_{m}}=\frac{134234434}{268486962}-0.5=-0.00003369623=-0.0034\%
-```
+* odchylka je rozdiel výskytu $n-m$-tice a očakaváneho počtu $n-m$-tice v podieli súčtu všetkých $m$-tíc v riadku
+    * majme maticu $2×1$, pozrieme sa dvojicu $00$-$0$
+    * $\#_{expected_{m}}=1/2=0.5$ 
+    * $b_{n,m}=134234434$
+    * $\#_{total_{m_{00}}}=268486962$
+    * potom $odchylka=\#_{expected_{m}} - \frac{b_{n,m}}{\#_{total_{m_{00}}}}=0.5 - \frac{134234434}{268486962}=0.00003369623=0.0034\%$
 * súčet ochyliek v riadku je 0%
 
 ### Analýza a záver
 #### LCG
 U vzoriek vygenerovaných LCG je pekne vidieť najmä na matici $4×4$ náchylnosť generovať niektore štvorice vo väčšom počte. Konkrétne, vo vzorke
-* _numerical-recipes_ sa za 4-icou $0011$ sa dosť často vyskitovala 4-ica $0000$
-* _XZ81_ sa za 4-icou $0000$ sa dosť často vyskitovala 4-ica $0000$
+* _numerical-recipes_ sa za 4-icou $0011$ sa dosť často vyskytovala 4-ica $0000$
+* _XZ81_ sa za 4-icou $0000$ sa dosť často vyskytovala 4-ica $0000$
 
 #### ATECC108
 U vzoriek generovaných ATECC108 už takéto náchylnosti nemožno pozorovať - ani naprieč rôznym prostrediam. Odchylky od výskytov sú rádovo až v mikropercentách ($μ\%$) a celá matica je zafarbéna ako lúka.
