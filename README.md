@@ -1,7 +1,7 @@
 # tehagenaci: ročníkový projekt
 
 ## O projekte
-**Názov**: Testovanie hardvérových generátorov náhodných čísiel
+**Názov**: Testovanie hardvérových generátorov náhodných čísel
 
 ### Študent
 **Meno**: Anton Kica
@@ -14,7 +14,7 @@
 
 **Email**: ostertag@dcs.fmph.uniba.sk
 
-### Cieľe projektu
+### Ciele projektu
 
 1. Vyvinúť alebo nájsť vhodné existujúce aplikácie pre testovanie kvality náhodných generátorov
 
@@ -26,19 +26,19 @@
 - src/lcg-generators
     - zdrojový kód pre generovanie vzoriek _ZX81_ a _numerical-recipes_ pomocou algoritmu lcg
 - src/processor
-    - zdrovjový kód pre spracovávanie vygenerovaných vzoriek
+    - zdrovový kód pre spracovanie vygenerovaných vzoriek
     - obsahuje jednoduché testy pre testovanie korektnosti kódu
 
 ## Tak ku projektu...
 
-Naša práca pozostávala z troch štadíí
+Naša práca pozostávala z troch štadií
 1. Generovanie vzoriek
 2. Spracovanie vygenerovaných vzoriek
 3. Analýza údajov zo vzoriek a záver
 
 ### Generovanie vzoriek
 
-Nášou úlohou bolo otestovať súčiastku ATECC108, teda usúdiť kvalitu generovaných náhodných čísel za rozličných podmienok.
+Našou úlohou bolo otestovať súčiastku ATECC108, teda posúdiť kvalitu generovaných náhodných čísel za rozličných podmienok.
 Rozhodli sme sa túto súčiastku testovať v troch prostrediach s rozličnými teplotami - 0°C, 21°C a 40°C. 
 
 Tiež sme sa pre referenciu rozhodli softvérovo vygenerovať vzorky náhodných čísel, ktoré sú zdanlivo náhodné, no ako uvidíme, nie úplne.
@@ -182,8 +182,8 @@ def process_files(output_dir):
 
 ## Spracované vzorky
 Jednoduché vysvetlenie:
-- farba dočervená je väčšie množstvo, než očakávané
-- farba domodra je menšie mnozštvo, než očakávané
+- farba do červená je väčšie množstvo, než očakávané
+- farba do modra je menšie množstvo, než očakávané
 
 ### Spracované vzorky ATECC108
 
@@ -247,40 +247,40 @@ process_files(input_lcg)
     
 
 
-### Vysvetlenie
+### Popis grafov
 #### Matice
 * n->m je matica $n×m$, napr. 2->1 je matica $2×1$ 
-* vypočítali sme štyri matice pre každú vzorku - $m_{2×1}$,$m_{2×2}$,$m_{4×2}$,$m_{4×4}$
+* vypočítali sme štyri matice pre každú vzorku - $m_{2×1},m_{2×2},m_{4×2},m_{4×4}$
 * na vrchu je názov vzorky
 
 #### Os $x$
 * na osi $x$ sa nachádza $m$-tica bitov
 #### Os $y$
 * na osi $y$ sa nachádza $n$-tica bitov
-* percentá zobrazujú precentuálny podiel riadku zo všetkých porovnaní
+* percentá zobrazujú percentuálny podiel riadku zo všetkých porovnaní
 * súčet percent na osi $y$ je $100\%$ 
 
 #### Bunka $b_{n,m}$
-* maticová bunka $b_{n,m}$ vyjadruje odchylku danej bunky vrámci riadku
-* odchylka je rozdiel výskytu $n-m$-tice a očakaváneho počtu $n-m$-tice v podieli súčtu všetkých $m$-tíc v riadku
+* maticová bunka $b_{n,m}$ vyjadruje odchylku danej bunky v rámci riadku
+* odchylka je rozdiel výskytu $n-m$-tice a očakávaného počtu $n-m$-tice v podieli súčtu všetkých $m$-tíc v riadku
     * majme maticu $2×1$, pozrieme sa dvojicu $00$-$0$
     * $\#_{expected_{m}}=1/2=0.5$ 
     * $b_{n,m}=134234434$
     * $\#_{total_{m_{00}}}=268486962$
     * potom $odchylka=\#_{expected_{m}} - \frac{b_{n,m}}{\#_{total_{m_{00}}}}=0.5 - \frac{134234434}{268486962}=0.00003369623=0.0034\%$
-* súčet ochyliek v riadku je 0%
+* súčet ochýlok v riadku je 0%
 
 ### Analýza a záver
 #### LCG
-U vzoriek vygenerovaných LCG je pekne vidieť najmä na matici $4×4$ náchylnosť generovať niektore štvorice vo väčšom počte. Konkrétne, vo vzorke
+U vzoriek vygenerovaných LCG je pekne vidieť najmä na matici $4×4$ náchylnosť generovať niektoré štvorice vo väčšom počte. Konkrétne, vo vzorke
 * _numerical-recipes_ sa za 4-icou $0011$ sa dosť často vyskytovala 4-ica $0000$
 * _XZ81_ sa za 4-icou $0000$ sa dosť často vyskytovala 4-ica $0000$
 
 #### ATECC108
-U vzoriek generovaných ATECC108 už takéto náchylnosti nemožno pozorovať - ani naprieč rôznym prostrediam. Odchylky od výskytov sú rádovo až v mikropercentách ($μ\%$) a celá matica je zafarbéna ako lúka.
+U vzoriek generovaných ATECC108 už takéto náchylnosti nemožno pozorovať - ani medzi rôznymi prostrediam. Odchylky od výskytov sú rádovo až v mikro percentách ($μ\%$) a celá matica je zafarbéna.
 
 #### Výsledok
-Pre generátor ATECC108 sme nespozorvali žiadnu signifikantnú zmenu medzi prostrediami. Zdá sa, že na škále 0°C až 40°C nedochádza k žiadnej zmene pri generovaní náhodných čísel.
+Pre generátor ATECC108 sme nespozorovali žiadnu signifikantnú zmenu medzi prostrediami. Zdá sa, že na škále 0°C až 40°C nedochádza k žiadnej zmene pri generovaní náhodných čísel.
 
 #### v závere
 Nenašli sme žiadne nezrovnalosti, preto usudzujeme, že bežné teploty okolitého prostredia nemajú vplyv na kvalitu generátora ATECC108.
