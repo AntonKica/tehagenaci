@@ -263,11 +263,19 @@ process_files(input_lcg)
 #### Bunka $b_{n,m}$
 * maticová bunka $b_{n,m}$ vyjadruje odchylku danej bunky v rámci riadku
 * odchylka je rozdiel výskytu $n-m$-tice a očakávaného počtu $n-m$-tice v podieli súčtu všetkých $m$-tíc v riadku
-    * majme maticu $2×1$, pozrieme sa dvojicu $00$-$0$
-    * $\#_{expected_{m}}=1/2=0.5$ 
-    * $b_{n,m}=134234434$
-    * $\#_{total_{m_{00}}}=268486962$
-    * potom $odchylka=\#_{expected_{m}} - \frac{b_{n,m}}{\#_{total_{m_{00}}}}=0.5 - \frac{134234434}{268486962}=0.00003369623=0.0034\%$
+    * majme maticu $2×1$, pozrieme sa dvojicu 00-0
+```math
+    \#_{expected_{m}}=1/2=0.5
+```
+```math
+    b_{n,m}=134234434
+```
+```math
+    \#_{total_{m_{00}}}=268486962
+```
+```math
+    odchylka=\frac{b_{n,m}}{\#_{total_{m_{00}}}}-\#_{expected_{m}}=0.5 - \frac{134234434}{268486962}=0.00003369623=0.0034\%
+```
 * súčet ochýlok v riadku je 0%
 
 ### Analýza a záver
